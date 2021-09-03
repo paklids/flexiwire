@@ -1,0 +1,24 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - wireguard
+  - wireguard-dkms
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - docker.io
+  - docker-compose
+runcmd:
+  - [systemctl, enable, wg-quick@wg0]
+  - [ufw, allow, 22/tcp]
+  - [ufw, allow, 80/tcp]
+  - [ufw, allow, 443/tcp]
+  - [ufw, allow, 51820/udp]
+  - [ufw, enable]
+power_state:
+  mode: reboot
+  message: RebootingNow
+  condition: True
+final_message: "--- SYSTEM NOW READY at $TIMESTAMP ---"
