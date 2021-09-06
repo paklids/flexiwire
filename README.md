@@ -31,13 +31,17 @@ Spin up a (manageable) wireguard VPN in Digital Ocean using terraform with minim
 2. rename the file (or copy) `secrets.tfvars.example` to `secrets.tfvars`
 3. with your favorite editor - add the necessary secrets from your accounts to `secrets.tfvars`
 4. At a command line run a terraform init and plan and see if anything was missed 
+
 ```terraform init && terraform plan --var-file secrets.tfvars```
-6. Now apply the config that was planned and it will build out the virtual server 
+
+5. Now apply the config that was planned and it will build out the virtual server 
+
 ```terraform apply --var-file secrets.tfvars```
-8. Once the virtual server (droplet) is built, you can connect to it using the command `ssh -i digital_ocean_key root@<ip_address_of_droplet>`
-9. The server will download all updates and reboot. This takes approx ten minutes. Be patient.
-10. Browse to the web portal that was setup `https://<my_domain_name>` and you should be able to login to the wiregaurd admin page
-11. Follow the directions that are provided from the wireguard-ui project to setup VPN users ( https://github.com/ngoduykhanh/wireguard-ui )
+
+6. Once the virtual server (droplet) is built, you can connect to it using the command `ssh -i digital_ocean_key root@<ip_address_of_droplet>`
+7. The server will download all updates and reboot. This takes approx ten minutes. Be patient.
+8. Browse to the web portal that was setup `https://<my_domain_name>` and you should be able to login to the wiregaurd admin page
+9. Follow the directions that are provided from the wireguard-ui project to setup VPN users ( https://github.com/ngoduykhanh/wireguard-ui )
 
 ## Backup what you need to recover from a disaster
 
