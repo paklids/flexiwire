@@ -1,0 +1,9 @@
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -i eth0 -p tcp --dport 6881:6889 -j DNAT --to-destination 10.0.0.2
+-A PREROUTING -i eth0 -p udp --dport 6881:6889 -j DNAT --to-destination 10.0.0.2
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -d 10.0.0.2 -p tcp --dport 6881:6889 -j SNAT --to-source 10.0.0.1
+-A POSTROUTING -d 10.0.0.2 -p udp --dport 6881:6889 -j SNAT --to-source 10.0.0.1
+-A POSTROUTING -s 10.0.0.0/24 -o eth0 -j MASQUERADE
+COMMIT

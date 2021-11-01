@@ -1,2 +1,1 @@
 */1 * * * * /root/wg_conf_restart.sh > /dev/null 2>&1
-*/5 * * * * /root/update_dynu.sh > /dev/null 2>&1

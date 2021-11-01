@@ -2,20 +2,27 @@
 package_update: true
 package_upgrade: true
 packages:
+  - nftables
+  - iperf3
+  - unattended-upgrades
+  - htop
+  - nmap
+  - tmux
+  - ufw
+  - fail2ban
   - wireguard
-  - wireguard-dkms
+  - wireguard-tools
   - apt-transport-https
   - ca-certificates
   - curl
   - software-properties-common
-  - docker.io
-  - docker-compose
 runcmd:
   - [systemctl, enable, wg-quick@wg0]
   - [ufw, allow, 22/tcp]
-  - [ufw, allow, 80/tcp]
-  - [ufw, allow, 443/tcp]
   - [ufw, allow, 51820/udp]
+  - [ufw, allow, 6881:6889/tcp]
+  - [ufw, allow, 6881:6889/udp]
+  - [ufw, default, allow, FORWARD] 
   - [ufw, enable]
 power_state:
   mode: reboot

@@ -12,14 +12,26 @@ data "template_cloudinit_config" "userdata" {
     content = jsonencode({
       write_files = [
         {
-          content = templatefile("${path.module}/templates/docker-compose.tpl", {
-            dynu_api_key  = var.dynu_api_key
-            dynu_domain   = var.dynu_domain
-            wgui_username = var.wgui_username
-            wgui_password = var.wgui_password
-            le_email_addr = var.le_email_addr
+          content     = file("${path.module}/templates/fail2ban_jaild_custom.conf")
+          path        = "/etc/fail2ban/jail.d/custom.conf"
+          permissions = "0600"
+        },
+        {
+          content     = file("${path.module}/templates/ufw_before-ipv4.rules")
+          path        = "/etc/ufw/before-ipv4.rules"
+          permissions = "0600"
+        },
+        {
+          content     = file("${path.module}/templates/ufw_before-ipv6.rules")
+          path        = "/etc/ufw/before-ipv6.rules"
+          permissions = "0600"
+        },
+        {
+          content = templatefile("${path.module}/templates/wg0.conf.tpl", {
+            publickey  = var.wg_publickey
+            privatekey = var.wg_privatekey
           })
-          path        = "/root/docker-compose.yml"
+          path        = "/etc/wireguard/wg0.conf"
           permissions = "0600"
         },
         {
@@ -31,19 +43,6 @@ data "template_cloudinit_config" "userdata" {
           content     = file("${path.module}/templates/wg_conf_restart.sh")
           path        = "/root/wg_conf_restart.sh"
           permissions = "0700"
-        },
-        {
-          content = templatefile("${path.module}/templates/update-dynu.tpl", {
-            dynu_credentials = var.dynu_credentials
-            dynu_domain      = var.dynu_domain
-          })
-          path        = "/root/update_dynu.sh"
-          permissions = "0700"
-        },
-        {
-          content     = file("${path.module}/templates/docker-compose.service")
-          path        = "/etc/systemd/system/docker-compose-app.service"
-          permissions = "0644"
         },
         {
           content     = file("${path.module}/templates/logrotate-syslog.conf")
