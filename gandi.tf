@@ -32,12 +32,12 @@ resource "gandi_livedns_record" "hostA" {
   ]
 }
 
-#resource "gandi_livedns_record" "hostAAAA" {
-#  zone = "${data.gandi_domain.mydomain.id}"
-#  name = var.hostname
-#  type = "AAAA"
-#  ttl = 300
-#  values = [
-#    "${digitalocean_droplet.wireguard.ipv6_address}"
-#  ]
-#}
+resource "gandi_livedns_record" "hostAAAA" {
+  zone = "${data.gandi_domain.mydomain.id}"
+  name = var.hostname
+  type = "AAAA"
+  ttl = 300
+  values = [
+    "${digitalocean_droplet.wireguard.ipv6_address}"
+  ]
+}

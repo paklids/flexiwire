@@ -27,6 +27,7 @@ resource "digitalocean_ssh_key" "provisionkey" {
 }
 
 resource "digitalocean_droplet" "wireguard" {
+  ipv6 = true
   image  = var.droplet_image
   name   = "wireguard"
   region = var.droplet_region
