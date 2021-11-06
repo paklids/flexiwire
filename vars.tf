@@ -1,3 +1,9 @@
+variable "sshpublickeys" {
+  type = list(string)
+  default = []
+}
+
+
 # Populate token from value provided in previous step
 variable "do_token" {
   type      = string
@@ -11,7 +17,7 @@ variable "do_token" {
 variable "droplet_image" {
   type        = string
   description = "Image to launch"
-  default     = "ubuntu-20-04-x64"
+  default     = "ubuntu-22-04-x64"
 }
 
 variable "droplet_region" {
@@ -22,7 +28,7 @@ variable "droplet_region" {
 variable "droplet_size" {
   type        = string
   description = "Size of droplet"
-  default     = "s-1vcpu-1gb"
+  default     = "s-1vcpu-512mb-10gb"
 }
 
 

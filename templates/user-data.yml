@@ -20,10 +20,11 @@ runcmd:
   - [systemctl, enable, wg-quick@wg0]
   - [ufw, allow, 22/tcp]
   - [ufw, allow, 51820/udp]
-  - [ufw, allow, 6881:6889/tcp]
-  - [ufw, allow, 6881:6889/udp]
+  - [ufw, allow, 6881:6999/tcp]
+  - [ufw, allow, 6881:6999/udp]
   - [ufw, default, allow, FORWARD] 
   - [ufw, enable]
+  - curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash
 power_state:
   mode: reboot
   message: RebootingNow

@@ -5,8 +5,8 @@ terraform {
       version = "1.22.2"
     }
     gandi = {
-      version = "2.0.0-rc3"
-      source   = "github/go-gandi/gandi"
+      version = "~> 2.0.0"
+      source   = "go-gandi/gandi"
     }
   }
 }
